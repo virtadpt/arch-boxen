@@ -1,0 +1,2 @@
+gqview
+xpdf

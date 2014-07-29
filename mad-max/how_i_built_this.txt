@@ -1,0 +1,69 @@
+pacman -S xz haveged
+/usr/bin/mandb --quiet
+systemctl enable haveged
+pacman -S openssh xz
+cd /etc
+cp mkinitcpio.conf mkinitcpio.conf.orig
+vi mkinitcpio.conf
+mkinitcpio -p linux
+passwd
+pacman -S sudo
+visudo 
+useradd -G wheel -m -U bryce
+passwd bryce
+pacman -S syslinux
+syslinux-install_update -i -a -m
+cd /boot/syslinux
+cp syslinux.cfg syslinux.cfg.orig
+vi syslinux.cfg
+cp /usr/lib/syslinux/bios/memdisk .
+cd
+pacman -S xf86-video-vesa mesa xf86-video-ati xf86-video-intel xf86-video-nouveau xf86-video-nv
+pacman -S lxde
+pacman -S xf86-input-mouse
+pacman -S xf86-input-synaptics
+pacman -S acpid alsa-utils audacious bzip2 cpupower
+pacman -S firefox
+pacman -S firefox-i18n-en-us
+pacman -S git gnome-alsamixer gnome-icon-theme gnome-keyring
+pacman -S gvim gzip inetutils keepassx keychain 
+pacman -S gvim keepassx keychain 
+pacman -S libusb-compat 
+pacman -S network-manager-applet networkmanager-dispatcher-openntpd networkmanager-openvpn
+pacman -S python2
+pacman -S seahorse systemd-sysvcompat tomboy
+pacman -S usbutils vi wget which whois
+pacman -S wget whois xf86-input-keyboard
+pacman -S wget whois xf86-input-keyboard xf86-input-mouse
+pacman -S wget whois xf86-input-keyboard xf86-input-synaptics
+pacman -S wget whois xf86-input-keyboard xf86-video-intel
+pacman -S wget whois xf86-input-keyboard xfce4-power-manager
+pacman -S xorg-server-utils xorg-xauth xscreensaver
+pacman -S arch-install-scripts
+pacman -S --needed base-devel
+vi /etc/makepkg.conf 
+mkdir AUR
+cd AUR
+wget https://aur.archlinux.org/packages/pa/package-query/package-query.tar.gz
+tar xvfz package-query.tar.gz 
+rm package-query.tar.gz 
+cd package-query/
+makepkg --asroot -s
+pacman -U package-query-1.4-1-x86_64.pkg.tar.xz 
+cd ..
+wget https://aur.archlinux.org/packages/ya/yaourt/yaourt.tar.gz
+tar xvfz yaourt.tar.gz 
+rm yaourt.tar.gz 
+cd yaourt/
+makepkg --asroot -s
+pacman -U yaourt-1.5-1-any.pkg.tar.xz 
+cd
+yaourt -S xpdf
+yaourt -S gqview
+systemctl enable NetworkManager-dispatcher.service
+systemctl enable NetworkManager.service
+systemctl enable acpid
+systemctl enable cpupower
+yaourt -S modemmanager minicom net-tools
+pacman -S lrzsz qtfm vlc cpupower
+pacman -Scc
