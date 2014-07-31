@@ -60,10 +60,11 @@ pacman -U yaourt-1.5-1-any.pkg.tar.xz
 cd
 yaourt -S xpdf
 yaourt -S gqview
+pacman -S lrzsz qtfm vlc cpupower bleachbit
 systemctl enable NetworkManager-dispatcher.service
 systemctl enable NetworkManager.service
 systemctl enable acpid
 systemctl enable cpupower
+systemctl enable lxdm
 yaourt -S modemmanager minicom net-tools
-pacman -S lrzsz qtfm vlc cpupower
 pacman -Scc
