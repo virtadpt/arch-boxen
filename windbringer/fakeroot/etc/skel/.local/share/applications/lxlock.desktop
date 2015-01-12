@@ -1,0 +1,9 @@
+[Desktop Entry]
+Exec=lxlock
+Icon=xscreensaver
+Terminal=false
+Name=Lock Screen
+Comment=Lock screen
+Type=Application
+Categories=Settings;DesktopSettings;Security;X-XFCE;
+NotShowIn=KDE;GNOME;
