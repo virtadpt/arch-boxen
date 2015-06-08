@@ -1,0 +1,19 @@
+[Unit]
+Description=Bluetooth auto power on
+After=bluetooth.service sys-subsystem-bluetooth-devices-%i.device suspend.target
+
+[Service]
+Type=oneshot
+# We could also do a 200 char long call to bluez via dbus. Except this does not
+# work since bluez does not react to dbus at this point of the resume sequence
+# and I do not know how I get this service to run at a time it does. So we just
+# ignore bluez and force %i up using hciconfig. Welcome to the 21st century.
+
+#ExecStart=/usr/bin/dbus-send --system --type=method_call --dest=org.bluez /org/bluez/%I org.freedesktop.DBus.Properties.Set string:org.bluez.Adapter1 string:Powered variant:boolean:true
+
+# I'd rather it stay down and have to be turned back on to save battery.
+ExecStart=/usr/bin/hciconfig %i down
+
+[Install]
+WantedBy=suspend.target
+
