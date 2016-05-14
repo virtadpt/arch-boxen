@@ -1,0 +1,16 @@
+[Unit]
+Description=cmatrix
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/cmatrix -a -b -C blue
+ExecStop=/usr/bin/kill -HUP ${MAINPID}
+StandardInput=tty
+StandardOutput=tty
+TTYPath=/dev/tty7
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=getty.target
+
